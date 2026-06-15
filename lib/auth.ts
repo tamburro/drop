@@ -13,7 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
     Resend({
       apiKey: process.env.AUTH_RESEND_KEY,
-      from: "Drop <noreply@getdrop.app>",
+      from: "Drop <onboarding@resend.dev>",
     }),
   ],
   pages: {
