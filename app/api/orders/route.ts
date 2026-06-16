@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   const { dropId, buyerEmail, buyerName, quantity } = parsed.data
 
-  const drop = await db.drop.findUnique({ where: { id: dropId } })
+  const drop = await db.drop.findUnique({ where: { id: dropId }, include: { user: true } })
   if (!drop) return NextResponse.json({ error: "Drop não encontrado" }, { status: 404 })
   if (drop.status !== "LIVE") {
     return NextResponse.json({ error: "Este drop não está aberto para compra" }, { status: 409 })
@@ -56,6 +56,7 @@ export async function POST(req: NextRequest) {
   const checkout = await createOrderCheckoutSession({
     orderId: order.id,
     dropTitle: drop.title,
+    handle: drop.user.handle ?? "",
     dropSlug: drop.slug,
     unitAmount: drop.price,
     quantity,

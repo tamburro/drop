@@ -41,6 +41,7 @@ export async function createCheckoutSession(userId: string, email: string) {
 export async function createOrderCheckoutSession(params: {
   orderId: string
   dropTitle: string
+  handle: string
   dropSlug: string
   unitAmount: number
   quantity: number
@@ -65,8 +66,8 @@ export async function createOrderCheckoutSession(params: {
     ],
     metadata: { orderId: params.orderId },
     payment_intent_data: { metadata: { orderId: params.orderId } },
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.dropSlug}?paid=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.dropSlug}`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.handle}/${params.dropSlug}?paid=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.handle}/${params.dropSlug}`,
   })
   return session
 }
