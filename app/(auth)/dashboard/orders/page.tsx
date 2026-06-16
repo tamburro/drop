@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { OrderStatusControl } from "@/components/orders/order-status-control"
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: "Pendente",
@@ -33,7 +34,7 @@ export default async function OrdersPage() {
       <div className="space-y-3">
         {orders.map((order) => (
           <Card key={order.id} className="border-border bg-card">
-            <CardContent className="flex items-center justify-between py-4">
+            <CardContent className="flex items-center justify-between gap-4 py-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-foreground">{order.buyerEmail}</span>
@@ -47,6 +48,7 @@ export default async function OrdersPage() {
                   </span>
                 </div>
               </div>
+              <OrderStatusControl orderId={order.id} status={order.status} />
             </CardContent>
           </Card>
         ))}
