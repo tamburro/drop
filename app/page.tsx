@@ -58,9 +58,6 @@ export default function LandingPage() {
         <HeroCanvas />
 
         <div className="relative">
-          <p className="mb-6 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs uppercase tracking-widest text-accent">
-            Lançamentos limitados que esgotam
-          </p>
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
