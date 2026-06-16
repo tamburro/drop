@@ -20,5 +20,13 @@ export const updateOrderStatusSchema = z.object({
   status: z.enum(["PENDING", "PAID", "SHIPPED", "DELIVERED", "CANCELLED"]),
 })
 
+export const createOrderSchema = z.object({
+  dropId: z.string().min(1, "dropId obrigatório"),
+  buyerEmail: z.email("Email inválido"),
+  buyerName: z.string().max(120).optional(),
+  quantity: z.number().int().min(1, "Quantidade mínima: 1").max(10, "Máximo 10 por pedido"),
+})
+
 export type CreateDropInput = z.infer<typeof createDropSchema>
 export type JoinWaitlistInput = z.infer<typeof joinWaitlistSchema>
+export type CreateOrderInput = z.infer<typeof createOrderSchema>

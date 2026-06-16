@@ -38,6 +38,39 @@ export async function createCheckoutSession(userId: string, email: string) {
   return session
 }
 
+export async function createOrderCheckoutSession(params: {
+  orderId: string
+  dropTitle: string
+  dropSlug: string
+  unitAmount: number
+  quantity: number
+  buyerEmail: string
+}) {
+  const methods: Stripe.Checkout.SessionCreateParams.PaymentMethodType[] = ["card"]
+  if (process.env.STRIPE_ENABLE_PIX === "true") methods.push("pix")
+
+  const session = await getStripe().checkout.sessions.create({
+    mode: "payment",
+    payment_method_types: methods,
+    customer_email: params.buyerEmail,
+    line_items: [
+      {
+        price_data: {
+          currency: "brl",
+          unit_amount: params.unitAmount,
+          product_data: { name: params.dropTitle },
+        },
+        quantity: params.quantity,
+      },
+    ],
+    metadata: { orderId: params.orderId },
+    payment_intent_data: { metadata: { orderId: params.orderId } },
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.dropSlug}?paid=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/${params.dropSlug}`,
+  })
+  return session
+}
+
 export async function createCustomerPortalSession(customerId: string) {
   const session = await getStripe().billingPortal.sessions.create({
     customer: customerId,

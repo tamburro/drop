@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { db } from "@/lib/db"
 import { stripe } from "@/lib/stripe"
+import { sendOrderConfirmation } from "@/lib/email"
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
@@ -17,6 +18,42 @@ export async function POST(req: NextRequest) {
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session
+
+      const orderId = session.metadata?.orderId
+      if (orderId) {
+        const order = await db.order.update({
+          where: { id: orderId },
+          data: {
+            status: "PAID",
+            stripePaymentIntentId:
+              typeof session.payment_intent === "string"
+                ? session.payment_intent
+                : session.payment_intent?.id,
+          },
+          include: { drop: true },
+        })
+
+        const paid = await db.order.findMany({
+          where: { dropId: order.dropId, status: { in: ["PAID", "SHIPPED", "DELIVERED"] } },
+          select: { items: true },
+        })
+        const sold = paid.reduce(
+          (acc, o) => acc + (o.items as { quantity: number }[]).reduce((s, i) => s + i.quantity, 0),
+          0
+        )
+        if (sold >= order.drop.stock) {
+          await db.drop.update({ where: { id: order.dropId }, data: { status: "SOLD_OUT" } })
+        }
+
+        await sendOrderConfirmation(
+          order.buyerEmail,
+          order.id,
+          order.drop.title,
+          order.total
+        ).catch(() => {})
+        break
+      }
+
       const userId = session.metadata?.userId
       if (!userId) break
 
