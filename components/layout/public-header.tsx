@@ -7,7 +7,19 @@ export function PublicHeader() {
         <Link href="/" className="font-display text-2xl tracking-wide text-accent">
           DROP
         </Link>
-        <nav className="flex items-center gap-3">
+        <nav className="flex items-center gap-5">
+          <Link
+            href="/explorar"
+            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Explorar
+          </Link>
+          <Link
+            href="/#planos"
+            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Planos
+          </Link>
           <Link
             href="/login"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"

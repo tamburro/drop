@@ -39,7 +39,13 @@ export default function LandingPage() {
 
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-border/60 bg-background/70 px-6 py-4 backdrop-blur">
         <span className="font-display text-2xl tracking-wide text-accent">DROP</span>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
+          <Link href="/explorar" data-cursor className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
+            Explorar
+          </Link>
+          <Link href="#planos" data-cursor className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
+            Planos
+          </Link>
           <Link href="/login" data-cursor className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Entrar
           </Link>
@@ -202,7 +208,7 @@ export default function LandingPage() {
       </section>
 
       {/* PRICING */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
+      <section id="planos" className="mx-auto max-w-5xl px-6 py-20">
         <Reveal>
           <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">Planos</h2>
           <p className="mt-2 text-muted-foreground">A taxa é a diferença. No Pro, você fica com tudo.</p>
