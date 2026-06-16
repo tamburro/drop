@@ -1,106 +1,269 @@
-import { ButtonLink } from "@/components/ui/button-link"
-import { Badge } from "@/components/ui/badge"
-import { Package, Users, ShoppingBag, BarChart2, Zap, Shield } from "lucide-react"
+import Link from "next/link"
+import { Package, Users, ShoppingBag, Truck, BarChart2, QrCode } from "lucide-react"
+import { DEMO_CREATORS, cover, avatar } from "@/lib/landing-data"
+import { Cursor } from "@/components/landing/cursor"
+import { Reveal } from "@/components/landing/reveal"
+import { MagneticLink } from "@/components/landing/magnetic"
+import { HeroCanvas } from "@/components/landing/hero-canvas"
+
+const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
+
+const allDrops = DEMO_CREATORS.flatMap((c) =>
+  c.drops.map((d) => ({ ...d, handle: c.handle, brand: c.brandName }))
+)
 
 const features = [
-  { icon: Package, title: "Drop Builder", description: "Crie páginas de lançamento com countdown, galeria e estoque limitado em minutos." },
-  { icon: Users, title: "Waitlist Engine", description: "Coleta emails com acesso antecipado para inscritos prioritários automaticamente." },
-  { icon: ShoppingBag, title: "Checkout Próprio", description: "Carrinho e pagamento Stripe integrado sem redirecionar para outra plataforma." },
-  { icon: Zap, title: "Order Manager", description: "Pedidos, status de envio e comunicação com comprador em um painel unificado." },
+  { icon: Package, title: "Drop Builder", description: "Página de lançamento com countdown, galeria e estoque limitado em minutos." },
+  { icon: Users, title: "Waitlist Engine", description: "Coleta emails com acesso antecipado para inscritos prioritários." },
+  { icon: QrCode, title: "Checkout com Pix", description: "Carrinho e pagamento próprio — cartão e Pix — sem redirecionar pra outra plataforma.", highlight: true },
+  { icon: Truck, title: "Order Manager", description: "Pedidos, status de envio e comunicação com o comprador num painel só." },
   { icon: BarChart2, title: "Drop Analytics", description: "Conversão de waitlist, receita por drop e taxa de sell-out em tempo real." },
-  { icon: Shield, title: "Sem intermediários", description: "Você vende direto para o seu público. 0% de taxa no plano PRO." },
+  { icon: ShoppingBag, title: "Loja própria", description: "Sua vitrine, sua marca, seu público. Sem intermediários." },
 ]
 
-const plans = [
-  { name: "Free", price: "Grátis", features: ["1 drop ativo", "100 entradas na waitlist", "5% de taxa por venda"], cta: "Começar grátis", highlight: false },
-  { name: "Trial", price: "14 dias", features: ["Tudo ilimitado", "0% de taxa", "Analytics completo"], cta: "Iniciar trial", highlight: false },
-  { name: "PRO", price: "R$ 69/mês", features: ["Drops ilimitados", "0% de taxa", "Analytics completo", "Suporte prioritário"], cta: "Assinar PRO", highlight: true },
+const steps = [
+  { n: "01", title: "Crie o drop", text: "Capa, descrição, preço, estoque e data. Pronto em minutos." },
+  { n: "02", title: "Junte a waitlist", text: "Fãs entram na fila e ganham acesso antecipado no lançamento." },
+  { n: "03", title: "Esgote no lançamento", text: "Countdown, escassez real e checkout com Pix. Venda fechada." },
 ]
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <nav className="flex items-center justify-between border-b border-border px-6 py-4">
-        <span className="text-xl font-bold text-accent">Drop</span>
-        <div className="flex items-center gap-4">
-          <ButtonLink href="/login" variant="ghost" size="sm">Entrar</ButtonLink>
-          <ButtonLink href="/login" size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90">Começar grátis</ButtonLink>
+    <div className="relative overflow-hidden bg-background text-foreground">
+      <Cursor />
+
+      {/* wordmark vertical */}
+      <div className="pointer-events-none fixed right-2 top-1/2 z-10 hidden -translate-y-1/2 rotate-90 text-xs uppercase tracking-[0.4em] text-muted-foreground/40 lg:block">
+        Drops sem parar
+      </div>
+
+      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-border/60 bg-background/70 px-6 py-4 backdrop-blur">
+        <span className="font-display text-2xl tracking-wide text-accent">DROP</span>
+        <div className="flex items-center gap-3">
+          <Link href="/login" data-cursor className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Entrar
+          </Link>
+          <MagneticLink href="/login" className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
+            Começar grátis
+          </MagneticLink>
         </div>
       </nav>
 
-      <section className="flex flex-col items-center px-6 py-32 text-center">
-        <Badge className="mb-6 border-accent/30 bg-accent/10 text-accent" variant="outline">
-          Lançamentos limitados que vendem
-        </Badge>
-        <h1 className="mb-6 max-w-3xl text-5xl font-bold leading-tight tracking-tight text-foreground md:text-6xl">
-          Lance drops.{" "}
-          <span className="text-accent">Venda para quem realmente quer.</span>
-        </h1>
-        <p className="mb-10 max-w-xl text-lg text-muted-foreground">
-          Plataforma de loja para criadores e marcas de nicho que lançam produtos limitados com lista de espera e checkout próprio.
-        </p>
-        <div className="flex gap-4">
-          <ButtonLink href="/login" size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            Criar meu primeiro drop
-          </ButtonLink>
-          <ButtonLink href="#features" size="lg" variant="outline" className="border-border text-foreground">
-            Ver como funciona
-          </ButtonLink>
+      {/* HERO */}
+      <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
+          <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-accent/20 blur-[120px]" />
+        </div>
+        <HeroCanvas />
+
+        <div className="relative">
+          <p className="mb-6 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs uppercase tracking-widest text-accent">
+            Lançamentos limitados que esgotam
+          </p>
+          <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
+            Lance drops.
+            <br />
+            <span className="text-accent">Venda pra quem</span>
+            <br />
+            realmente quer.
+          </h1>
+          <p className="mx-auto mt-8 max-w-xl text-lg text-muted-foreground">
+            A loja dos criadores que esgotam em minutos — waitlist priorizada, countdown e checkout com Pix.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <MagneticLink href="/login" className="rounded-full bg-accent px-7 py-3 font-medium text-accent-foreground">
+              Criar meu primeiro drop
+            </MagneticLink>
+            <MagneticLink href="#drops" className="rounded-full border border-border px-7 py-3 font-medium text-foreground">
+              Ver drops ao vivo
+            </MagneticLink>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">Grátis. Sem cartão. Sem mensalidade no plano Free.</p>
         </div>
       </section>
 
-      <section id="features" className="px-6 py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">
-            Tudo que você precisa para lançar
+      {/* MARQUEE */}
+      <section id="drops" className="border-y border-border/60 py-10">
+        <div className="flex w-max marquee-track gap-4">
+          {[...allDrops, ...allDrops].map((d, i) => (
+            <Link
+              key={`${d.slug}-${i}`}
+              href={`/${d.handle}/${d.slug}`}
+              data-cursor
+              className="group relative block h-56 w-56 shrink-0 overflow-hidden rounded-2xl border border-border"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={cover(d.slug, 400)}
+                alt={d.title}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:-skew-y-1"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3">
+                <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent">
+                  {STATUS[d.status]}
+                </span>
+                <p className="mt-1 truncate text-sm font-medium text-foreground">{d.title}</p>
+                <p className="text-xs text-muted-foreground">{d.brand}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* COMO FUNCIONA */}
+      <section className="mx-auto max-w-5xl px-6 py-28">
+        <Reveal>
+          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">Como funciona</h2>
+        </Reveal>
+        <div className="mt-12 grid gap-8 md:grid-cols-3">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 100} className="rounded-2xl border border-border bg-card p-6">
+              <span className="font-display text-5xl text-accent/40">{s.n}</span>
+              <h3 className="mt-4 text-xl font-semibold text-foreground">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal>
+          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
+            Tudo pra esgotar
           </h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {features.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="rounded-xl border border-border bg-card p-6">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                  <Icon className="h-5 w-5 text-accent" />
-                </div>
-                <h3 className="mb-2 font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground">{description}</p>
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {features.map((f, i) => (
+            <Reveal
+              key={f.title}
+              delay={(i % 3) * 80}
+              className={`rounded-2xl border p-6 ${f.highlight ? "border-accent bg-accent/5" : "border-border bg-card"}`}
+            >
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <f.icon className="h-5 w-5 text-accent" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">Planos simples</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {plans.map((plan) => (
-              <div key={plan.name} className={`rounded-xl border p-6 ${plan.highlight ? "border-accent bg-accent/5" : "border-border bg-card"}`}>
-                {plan.highlight && (
-                  <Badge className="mb-3 bg-accent text-accent-foreground">Popular</Badge>
+              <h3 className="mb-2 flex items-center gap-2 font-semibold text-foreground">
+                {f.title}
+                {f.highlight && (
+                  <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+                    BR
+                  </span>
                 )}
-                <div className="mb-1 text-lg font-bold text-foreground">{plan.name}</div>
-                <div className="mb-4 text-2xl font-bold text-accent">{plan.price}</div>
-                <ul className="mb-6 space-y-2">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="text-accent">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <ButtonLink
-                  href="/login"
-                  variant={plan.highlight ? "default" : "outline"}
-                  className={`w-full ${plan.highlight ? "bg-accent text-accent-foreground hover:bg-accent/90" : "border-border text-foreground"}`}
-                >
-                  {plan.cta}
-                </ButtonLink>
-              </div>
-            ))}
-          </div>
+              </h3>
+              <p className="text-sm text-muted-foreground">{f.description}</p>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
-        <span className="font-bold text-accent">Drop</span> — Lance drops. Venda para quem realmente quer.
+      {/* STATS BAND */}
+      <section className="px-6 py-16">
+        <Reveal className="mx-auto max-w-5xl rounded-3xl bg-gradient-to-r from-primary to-accent px-8 py-12">
+          <div className="grid gap-8 text-center sm:grid-cols-3">
+            {[
+              ["0%", "de taxa no Pro"],
+              ["Pix", "nativo no checkout"],
+              ["Waitlist", "com acesso priorizado"],
+            ].map(([big, small]) => (
+              <div key={small}>
+                <p className="font-display text-4xl text-accent-foreground md:text-5xl">{big}</p>
+                <p className="mt-1 text-sm text-accent-foreground/80">{small}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* CRIADORES */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal>
+          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
+            Criadores no Drop
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {DEMO_CREATORS.map((c, i) => (
+            <Reveal key={c.handle} delay={(i % 3) * 70}>
+              <Link
+                href={`/${c.handle}`}
+                data-cursor
+                className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={avatar(c.handle)} alt="" className="h-12 w-12 rounded-full object-cover" />
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-foreground">{c.brandName}</p>
+                  <p className="truncate text-xs text-muted-foreground">{c.niche}</p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal>
+          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">Planos</h2>
+          <p className="mt-2 text-muted-foreground">A taxa é a diferença. No Pro, você fica com tudo.</p>
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {[
+            { name: "Free", price: "Grátis", fee: "5% por venda", features: ["1 drop ativo", "100 na waitlist", "Checkout próprio"], highlight: false },
+            { name: "Trial", price: "14 dias", fee: "0% de taxa", features: ["Tudo ilimitado", "Analytics", "Sem cartão"], highlight: false },
+            { name: "PRO", price: "R$ 69/mês", fee: "0% de taxa", features: ["Drops ilimitados", "Analytics completo", "Suporte prioritário"], highlight: true },
+          ].map((p) => (
+            <Reveal
+              key={p.name}
+              className={`rounded-2xl border p-6 ${p.highlight ? "border-accent bg-accent/5" : "border-border bg-card"}`}
+            >
+              {p.highlight && (
+                <span className="mb-3 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+                  RECOMENDADO
+                </span>
+              )}
+              <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
+              <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>
+              <div className="mt-1 text-sm font-medium text-foreground">{p.fee}</div>
+              <ul className="my-6 space-y-2">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-accent">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <MagneticLink
+                href="/login"
+                className={`w-full rounded-full px-5 py-3 text-sm font-medium ${p.highlight ? "bg-accent text-accent-foreground" : "border border-border text-foreground"}`}
+              >
+                Começar
+              </MagneticLink>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="relative border-t border-border px-6 py-20">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
+          <Reveal>
+            <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-6xl">
+              Comece seu<br />primeiro drop
+            </h2>
+          </Reveal>
+          <MagneticLink href="/login" className="rounded-full bg-accent px-8 py-4 font-medium text-accent-foreground">
+            Criar grátis →
+          </MagneticLink>
+          <div className="spin-badge mt-4 flex h-24 w-24 items-center justify-center rounded-full border border-accent/30">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-accent">drop • drop •</span>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            <span className="font-display text-accent">DROP</span> — Lance drops. Venda para quem realmente quer.
+          </p>
+        </div>
       </footer>
     </div>
   )
