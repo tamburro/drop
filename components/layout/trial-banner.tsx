@@ -15,7 +15,7 @@ export function TrialBanner({ daysLeft }: TrialBannerProps) {
       <ButtonLink
         href="/settings/billing"
         size="sm"
-        className="h-7 bg-accent text-accent-foreground hover:bg-accent/90"
+        className="h-7 rounded-full bg-accent text-accent-foreground hover:bg-accent/90"
       >
         Fazer upgrade
       </ButtonLink>

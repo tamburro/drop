@@ -8,7 +8,7 @@ export default async function NewDropPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Novo drop</h1>
+      <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Novo drop</h1>
       <NewDropForm handle={user.handle} />
     </div>
   )

@@ -25,8 +25,8 @@ export default async function DropsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">Drops</h1>
-        <ButtonLink href="/dashboard/drops/new" className="bg-accent text-accent-foreground hover:bg-accent/90">
+        <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Drops</h1>
+        <ButtonLink href="/dashboard/drops/new" className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
           + Novo Drop
         </ButtonLink>
       </div>
@@ -37,7 +37,7 @@ export default async function DropsPage() {
             <p className="text-muted-foreground">Nenhum drop criado ainda.</p>
             <ButtonLink
               href="/dashboard/drops/new"
-              className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90"
+              className="mt-4 rounded-full bg-accent text-accent-foreground hover:bg-accent/90"
             >
               Criar primeiro drop
             </ButtonLink>

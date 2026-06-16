@@ -14,7 +14,7 @@ export default async function AnalyticsPage() {
   if (!hasAnalytics) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
+        <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Analytics</h1>
         <PaywallGate
           locked={true}
           title="Analytics PRO"
@@ -36,7 +36,7 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
+      <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Analytics</h1>
 
       <div className="space-y-4">
         {drops.map((drop) => {

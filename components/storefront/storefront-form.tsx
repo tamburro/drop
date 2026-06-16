@@ -121,7 +121,7 @@ export function StorefrontForm({ initial }: { initial: Initial }) {
           <p className={message.type === "ok" ? "text-sm text-accent" : "text-sm text-destructive"}>{message.text}</p>
         )}
 
-        <Button type="submit" disabled={status === "saving"} className="bg-accent text-accent-foreground hover:bg-accent/90">
+        <Button type="submit" disabled={status === "saving"} className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
           {status === "saving" ? "Salvando..." : "Salvar vitrine"}
         </Button>
       </form>

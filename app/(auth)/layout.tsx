@@ -19,7 +19,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
     <div className="flex h-screen bg-background">
       <aside className="flex w-56 flex-col border-r border-sidebar-border bg-sidebar">
         <div className="flex h-14 items-center px-4 border-b border-sidebar-border">
-          <span className="text-lg font-bold text-accent">Drop</span>
+          <span className="font-display text-2xl tracking-wide text-accent">DROP</span>
         </div>
         <nav className="flex-1 space-y-1 p-2">
           {[

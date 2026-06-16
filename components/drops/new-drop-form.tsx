@@ -154,7 +154,7 @@ export function NewDropForm({ handle }: { handle: string | null }) {
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
-      <Button type="submit" disabled={loading} className="bg-accent text-accent-foreground hover:bg-accent/90">
+      <Button type="submit" disabled={loading} className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
         {loading ? "Criando..." : "Criar drop"}
       </Button>
     </form>

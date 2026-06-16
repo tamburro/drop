@@ -23,8 +23,8 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">Visão Geral</h1>
-        <ButtonLink href="/dashboard/drops/new" className="bg-accent text-accent-foreground hover:bg-accent/90">
+        <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Visão Geral</h1>
+        <ButtonLink href="/dashboard/drops/new" className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
           + Novo Drop
         </ButtonLink>
       </div>
@@ -36,13 +36,13 @@ export default async function DashboardPage() {
           { label: "Na Waitlist", value: waitlistCount, icon: Users },
           { label: "Receita", value: `R$ ${revenueTotal.toFixed(2)}`, icon: TrendingUp },
         ].map(({ label, value, icon: Icon }) => (
-          <Card key={label} className="border-border bg-card">
+          <Card key={label} className="rounded-2xl border-border bg-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
+              <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">{label}</CardTitle>
               <Icon className="h-4 w-4 text-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">{value}</div>
+              <div className="font-display text-3xl text-foreground">{value}</div>
             </CardContent>
           </Card>
         ))}

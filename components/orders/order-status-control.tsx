@@ -47,7 +47,7 @@ export function OrderStatusControl({ orderId, status }: { orderId: string; statu
           variant={a.variant ?? "default"}
           disabled={loading !== null}
           onClick={() => update(a.to)}
-          className={a.variant === "outline" ? "border-border text-foreground" : "bg-accent text-accent-foreground hover:bg-accent/90"}
+          className={a.variant === "outline" ? "border-border text-foreground" : "rounded-full bg-accent text-accent-foreground hover:bg-accent/90"}
         >
           {loading === a.to ? "..." : a.label}
         </Button>

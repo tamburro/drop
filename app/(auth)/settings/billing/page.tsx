@@ -23,7 +23,7 @@ export default async function BillingPage({
 
   return (
     <div className="max-w-xl space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Assinatura</h1>
+      <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Assinatura</h1>
 
       {params.success && (
         <div className="rounded-md border border-accent/30 bg-accent/10 p-3 text-sm text-accent">
@@ -61,7 +61,7 @@ export default async function BillingPage({
                 redirect(checkout.url!)
               }}
             >
-              <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button type="submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
                 Fazer upgrade para PRO — R$ 69/mês
               </Button>
             </form>
