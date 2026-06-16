@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { MobileMenu } from "@/components/layout/mobile-menu"
 
 export function PublicHeader() {
   return (
@@ -7,23 +8,15 @@ export function PublicHeader() {
         <Link href="/" className="font-display text-2xl tracking-wide text-accent">
           DROP
         </Link>
-        <nav className="flex items-center gap-5">
-          <Link
-            href="/explorar"
-            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
-          >
+
+        <nav className="hidden items-center gap-5 sm:flex">
+          <Link href="/explorar" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Explorar
           </Link>
-          <Link
-            href="/#planos"
-            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
-          >
+          <Link href="/#planos" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Planos
           </Link>
-          <Link
-            href="/login"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
+          <Link href="/login" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Entrar
           </Link>
           <Link
@@ -33,6 +26,8 @@ export function PublicHeader() {
             Começar grátis
           </Link>
         </nav>
+
+        <MobileMenu />
       </div>
     </header>
   )
