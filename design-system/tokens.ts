@@ -47,7 +47,7 @@ export const tokens = {
     16: "4rem",
   },
   typography: {
-    fontSans: "var(--font-geist-sans)",
+    fontSans: "var(--font-sans)",
     fontMono: "var(--font-geist-mono)",
     xs: "0.75rem",
     sm: "0.875rem",
