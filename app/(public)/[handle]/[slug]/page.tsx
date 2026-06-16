@@ -37,6 +37,12 @@ export default async function PublicDropPage({
   const isLive = drop.status === "LIVE"
   const accent = drop.user.accentColor ?? undefined
 
+  const otherDrops = await db.drop.findMany({
+    where: { userId: drop.userId, status: "LIVE", id: { not: drop.id } },
+    select: { slug: true, title: true, price: true, coverImage: true },
+    take: 3,
+  })
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-10" style={accent ? ({ ["--accent"]: accent } as React.CSSProperties) : undefined}>
       <Link
@@ -93,7 +99,15 @@ export default async function PublicDropPage({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <DropPurchase dropId={drop.id} isLive={isLive} remaining={remaining} />
+              <DropPurchase
+                dropId={drop.id}
+                dropTitle={drop.title}
+                unitPrice={drop.price}
+                isLive={isLive}
+                remaining={remaining}
+                handle={handle}
+                otherDrops={otherDrops}
+              />
             </CardContent>
           </Card>
         </div>
