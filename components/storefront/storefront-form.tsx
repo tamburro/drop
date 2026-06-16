@@ -63,7 +63,7 @@ export function StorefrontForm({ initial }: { initial: Initial }) {
             placeholder="suamarca"
             required
           />
-          <p className="text-xs text-muted-foreground">drop-self-ten.vercel.app/{form.handle || "suamarca"}</p>
+          <p className="text-xs text-muted-foreground">usedrop-br.vercel.app/{form.handle || "suamarca"}</p>
         </div>
 
         <div className="space-y-2">

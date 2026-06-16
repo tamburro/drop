@@ -102,7 +102,7 @@ export function NewDropForm({ handle }: { handle: string | null }) {
           onFocus={() => set("slugTouched", true)}
           required
         />
-        <p className="text-xs text-muted-foreground">drop-self-ten.vercel.app/{handle}/{form.slug || "slug"}</p>
+        <p className="text-xs text-muted-foreground">usedrop-br.vercel.app/{handle}/{form.slug || "slug"}</p>
       </div>
 
       <div className="space-y-2">
