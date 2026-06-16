@@ -5,7 +5,6 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { HeroCanvas } from "@/components/landing/hero-canvas"
-import { PortfolioGallery } from "@/components/ui/portfolio-gallery"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -115,13 +114,6 @@ export default function LandingPage() {
           ))}
         </div>
       </section>
-
-      {/* GALERIA 3D (teste) */}
-      <PortfolioGallery
-        title="Drops em destaque"
-        archiveButton={{ text: "Explorar criadores", href: "/explorar" }}
-        images={allDrops.map((d) => ({ src: cover(d.slug, 800), alt: d.title, title: d.title }))}
-      />
 
       {/* COMO FUNCIONA */}
       <section className="mx-auto max-w-5xl px-6 py-28">
