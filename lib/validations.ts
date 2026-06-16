@@ -10,6 +10,8 @@ export const createDropSchema = z.object({
     .string()
     .min(3)
     .regex(/^[a-z0-9-]+$/, "Apenas letras minúsculas, números e hífens"),
+  coverImage: z.url("URL inválida").optional().or(z.literal("")),
+  status: z.enum(["DRAFT", "SCHEDULED", "LIVE"]).default("DRAFT"),
 })
 
 export const joinWaitlistSchema = z.object({

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { Prisma } from "@prisma/client"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { createDropSchema } from "@/lib/validations"
@@ -41,15 +42,36 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  if (!user.handle) {
+    return NextResponse.json(
+      { error: "Configure sua vitrine (@handle) antes de criar um drop." },
+      { status: 409 }
+    )
+  }
+
   const body = await req.json()
   const parsed = createDropSchema.safeParse(body)
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
+    const first = parsed.error.issues[0]
+    return NextResponse.json({ error: first?.message ?? "Dados inválidos" }, { status: 400 })
   }
 
-  const drop = await db.drop.create({
-    data: { ...parsed.data, userId: user.id, launchAt: new Date(parsed.data.launchAt) },
-  })
+  const { coverImage, ...rest } = parsed.data
 
-  return NextResponse.json(drop, { status: 201 })
+  try {
+    const drop = await db.drop.create({
+      data: {
+        ...rest,
+        coverImage: coverImage || null,
+        userId: user.id,
+        launchAt: new Date(parsed.data.launchAt),
+      },
+    })
+    return NextResponse.json(drop, { status: 201 })
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
+      return NextResponse.json({ error: "Esse slug já está em uso" }, { status: 409 })
+    }
+    throw e
+  }
 }
