@@ -41,6 +41,14 @@ model User {
   stripePriceId          String?
   stripeSubscriptionId   String?   @unique
   stripeCurrentPeriodEnd DateTime?
+
+  handle      String? @unique
+  brandName   String?
+  avatar      String?
+  accentColor String?
+  bio         String?
+  socials     Json?
+
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 

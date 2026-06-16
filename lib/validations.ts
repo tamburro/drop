@@ -20,6 +20,27 @@ export const updateOrderStatusSchema = z.object({
   status: z.enum(["PENDING", "PAID", "SHIPPED", "DELIVERED", "CANCELLED"]),
 })
 
+export const storefrontSchema = z.object({
+  handle: z
+    .string()
+    .min(3, "Mínimo 3 caracteres")
+    .max(30, "Máximo 30 caracteres")
+    .regex(/^[a-z0-9-]+$/, "Apenas letras minúsculas, números e hífens"),
+  brandName: z.string().min(1, "Informe o nome da marca").max(60),
+  avatar: z.url("URL inválida").optional().or(z.literal("")),
+  accentColor: z
+    .string()
+    .regex(/^#([0-9a-fA-F]{6})$/, "Use uma cor hex (ex: #12A8C4)"),
+  bio: z.string().max(280).optional().or(z.literal("")),
+  socials: z
+    .object({
+      instagram: z.string().max(120).optional().or(z.literal("")),
+      tiktok: z.string().max(120).optional().or(z.literal("")),
+      site: z.url("URL inválida").optional().or(z.literal("")),
+    })
+    .optional(),
+})
+
 export const createOrderSchema = z.object({
   dropId: z.string().min(1, "dropId obrigatório"),
   buyerEmail: z.email("Email inválido"),
@@ -30,3 +51,4 @@ export const createOrderSchema = z.object({
 export type CreateDropInput = z.infer<typeof createDropSchema>
 export type JoinWaitlistInput = z.infer<typeof joinWaitlistSchema>
 export type CreateOrderInput = z.infer<typeof createOrderSchema>
+export type StorefrontInput = z.infer<typeof storefrontSchema>

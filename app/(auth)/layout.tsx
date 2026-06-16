@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { TrialBanner } from "@/components/layout/trial-banner"
 import { daysLeftInTrial, isTrialActive, hasAccess } from "@/lib/subscription"
 import Link from "next/link"
-import { Home, Package, ShoppingBag, BarChart2, Settings } from "lucide-react"
+import { Home, Package, ShoppingBag, BarChart2, Settings, Store } from "lucide-react"
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
@@ -27,6 +27,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
           {[
             { href: "/dashboard", label: "Início", icon: Home },
             { href: "/dashboard/drops", label: "Drops", icon: Package },
+            { href: "/dashboard/storefront", label: "Minha vitrine", icon: Store },
             { href: "/dashboard/orders", label: "Pedidos", icon: ShoppingBag },
             { href: "/dashboard/analytics", label: "Analytics", icon: BarChart2 },
             { href: "/settings/billing", label: "Configurações", icon: Settings },
