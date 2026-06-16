@@ -8,7 +8,7 @@ function getStripe(): Stripe {
       throw new Error("STRIPE_SECRET_KEY não configurada")
     }
     _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: "2026-02-25.acme.0" as any,
+      apiVersion: "2026-05-27.dahlia" as any,
     })
   }
   return _stripe
