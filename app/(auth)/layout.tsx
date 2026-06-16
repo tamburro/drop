@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { db } from "@/lib/db"
 import { TrialBanner } from "@/components/layout/trial-banner"
-import { daysLeftInTrial, isTrialActive, hasAccess } from "@/lib/subscription"
+import { daysLeftInTrial, isTrialActive } from "@/lib/subscription"
 import Link from "next/link"
 import { Home, Package, ShoppingBag, BarChart2, Settings, Store } from "lucide-react"
 
@@ -11,8 +11,6 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
   if (!session?.user?.id) redirect("/login")
 
   const user = await db.user.findUniqueOrThrow({ where: { id: session.user.id } })
-
-  if (!hasAccess(user)) redirect("/settings/billing?expired=true")
 
   const showTrial = isTrialActive(user)
   const days = daysLeftInTrial(user)
