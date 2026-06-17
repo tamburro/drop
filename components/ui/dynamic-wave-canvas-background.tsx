@@ -46,7 +46,7 @@ export default function HeroWave({ className }: { className?: string }) {
     const fastCos = (x: number) => COS_TABLE[Math.floor(((x % (Math.PI * 2)) / (Math.PI * 2)) * 1024) & 1023]
 
     const render = () => {
-      const time = (Date.now() - startTime) * 0.001
+      const time = (Date.now() - startTime) * 0.0006
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const u_x = (2 * x - width) / height
@@ -63,7 +63,7 @@ export default function HeroWave({ className }: { className?: string }) {
           const accent = baseVal + 0.2 * fastSin(a * 1.5 + time * 0.2) + 0.1
 
           const tone = Math.max(0, Math.min(1, accent)) * intensity
-          const boost = 3.0
+          const boost = 2.0
           const r = Math.min(1, tone * 0.12 * boost)
           const g = Math.min(1, tone * 0.62 * boost)
           const b = Math.min(1, tone * 0.82 * boost)
