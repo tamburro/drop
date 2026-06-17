@@ -6,6 +6,12 @@ import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { PublicHeader } from "@/components/layout/public-header"
 import HeroWave from "@/components/ui/dynamic-wave-canvas-background"
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid"
+import { MagicCard } from "@/components/ui/magic-card"
+import { BorderBeam } from "@/components/ui/border-beam"
+import { AvatarCircles } from "@/components/ui/avatar-circles"
+import { Marquee } from "@/components/ui/marquee"
+import { NumberTicker } from "@/components/ui/number-ticker"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -30,13 +36,13 @@ for (let c = 0; heroColumns.length < 10; c++) {
   }
 }
 
-const features = [
-  { icon: Package, title: "Drop Builder", description: "Página de lançamento com countdown, galeria e estoque limitado em minutos." },
-  { icon: Users, title: "Waitlist Engine", description: "Coleta emails com acesso antecipado para inscritos prioritários." },
-  { icon: QrCode, title: "Checkout com Pix", description: "Carrinho e pagamento próprio — cartão e Pix — sem redirecionar pra outra plataforma.", highlight: true },
-  { icon: Truck, title: "Order Manager", description: "Pedidos, status de envio e comunicação com o comprador num painel só." },
-  { icon: BarChart2, title: "Drop Analytics", description: "Conversão de waitlist, receita por drop e taxa de sell-out em tempo real." },
-  { icon: ShoppingBag, title: "Loja própria", description: "Sua vitrine, sua marca, seu público. Sem intermediários." },
+const bento = [
+  { name: "Drop Builder", description: "Página de lançamento com countdown, galeria e estoque limitado em minutos.", Icon: Package, span: "md:col-span-1", cover: null as string | null },
+  { name: "Checkout com Pix", description: "Cartão e Pix no seu próprio checkout, sem redirecionar pra outra plataforma.", Icon: QrCode, span: "md:col-span-2", cover: "nevoa-capsula-aurora" },
+  { name: "Waitlist Engine", description: "Coleta emails com acesso antecipado priorizado para os inscritos.", Icon: Users, span: "md:col-span-2", cover: null },
+  { name: "Order Manager", description: "Pedidos, status de envio e comunicação com o comprador num painel só.", Icon: Truck, span: "md:col-span-1", cover: null },
+  { name: "Drop Analytics", description: "Conversão de waitlist, receita por drop e taxa de sell-out em tempo real.", Icon: BarChart2, span: "md:col-span-1", cover: null },
+  { name: "Loja própria", description: "Sua vitrine, sua marca, seu público — sem intermediários.", Icon: ShoppingBag, span: "md:col-span-2", cover: "raiz-jaqueta" },
 ]
 
 const steps = [
@@ -142,79 +148,102 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* FEATURES — bento */}
       <section className="mx-auto max-w-5xl px-6 py-20">
         <Reveal>
           <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
             Tudo pra esgotar
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {features.map((f, i) => (
-            <Reveal
-              key={f.title}
-              delay={(i % 3) * 80}
-              className={`rounded-2xl border p-6 ${f.highlight ? "border-accent bg-accent/5" : "border-border bg-card"}`}
-            >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                <f.icon className="h-5 w-5 text-accent" />
-              </div>
-              <h3 className="mb-2 flex items-center gap-2 font-semibold text-foreground">
-                {f.title}
-                {f.highlight && (
-                  <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-                    BR
-                  </span>
-                )}
-              </h3>
-              <p className="text-sm text-muted-foreground">{f.description}</p>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="mt-12">
+          <BentoGrid className="grid-cols-1 md:grid-cols-3">
+            {bento.map((f) => (
+              <BentoCard
+                key={f.name}
+                name={f.name}
+                description={f.description}
+                Icon={f.Icon}
+                className={f.span}
+                background={
+                  f.cover ? (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={cover(f.cover, 800)}
+                        alt=""
+                        className="absolute inset-0 h-full w-full object-cover opacity-30 transition-opacity duration-300 group-hover:opacity-45"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-card/30" />
+                    </>
+                  ) : (
+                    <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
+                  )
+                }
+              />
+            ))}
+          </BentoGrid>
+        </Reveal>
       </section>
 
       {/* STATS BAND */}
       <section className="px-6 py-16">
-        <Reveal className="mx-auto max-w-5xl rounded-3xl bg-gradient-to-r from-primary to-accent px-8 py-12">
+        <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-r from-primary to-accent px-8 py-12">
           <div className="grid gap-8 text-center sm:grid-cols-3">
-            {[
-              ["0%", "de taxa no Pro"],
-              ["Pix", "nativo no checkout"],
-              ["Waitlist", "com acesso priorizado"],
-            ].map(([big, small]) => (
-              <div key={small}>
-                <p className="font-display text-4xl text-accent-foreground md:text-5xl">{big}</p>
-                <p className="mt-1 text-sm text-accent-foreground/80">{small}</p>
-              </div>
-            ))}
+            <div>
+              <p className="font-display text-5xl text-accent-foreground">
+                R$ <NumberTicker value={2.4} decimalPlaces={1} className="text-accent-foreground" />M+
+              </p>
+              <p className="mt-1 text-sm text-accent-foreground/80">em drops vendidos</p>
+            </div>
+            <div>
+              <p className="font-display text-5xl text-accent-foreground">
+                <NumberTicker value={120} className="text-accent-foreground" />k+
+              </p>
+              <p className="mt-1 text-sm text-accent-foreground/80">na waitlist</p>
+            </div>
+            <div>
+              <p className="font-display text-5xl text-accent-foreground">
+                <NumberTicker value={1800} className="text-accent-foreground" />
+              </p>
+              <p className="mt-1 text-sm text-accent-foreground/80">criadores na plataforma</p>
+            </div>
           </div>
+          <BorderBeam size={140} duration={9} colorFrom="#F0F4F8" colorTo="#12A8C4" />
         </Reveal>
       </section>
 
       {/* CRIADORES */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <Reveal>
-          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
-            Criadores no Drop
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {DEMO_CREATORS.map((c, i) => (
-            <Reveal key={c.handle} delay={(i % 3) * 70}>
+      <section className="py-20">
+        <div className="mx-auto mb-10 max-w-5xl px-6">
+          <Reveal className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
+              Criadores no Drop
+            </h2>
+            <AvatarCircles
+              avatarUrls={DEMO_CREATORS.map((c) => ({ imageUrl: avatar(c.handle), profileUrl: `/${c.handle}` }))}
+            />
+          </Reveal>
+        </div>
+        <div className="relative">
+          <Marquee pauseOnHover className="[--duration:35s]">
+            {DEMO_CREATORS.map((c) => (
               <Link
+                key={c.handle}
                 href={`/${c.handle}`}
                 data-cursor
-                className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent"
+                className="flex w-64 items-center gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={avatar(c.handle)} alt="" className="h-12 w-12 rounded-full object-cover" />
+                <img src={avatar(c.handle)} alt="" className="h-12 w-12 shrink-0 rounded-full object-cover" />
                 <div className="min-w-0">
                   <p className="truncate font-medium text-foreground">{c.brandName}</p>
                   <p className="truncate text-xs text-muted-foreground">{c.niche}</p>
                 </div>
               </Link>
-            </Reveal>
-          ))}
+            ))}
+          </Marquee>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
         </div>
       </section>
 
@@ -230,31 +259,35 @@ export default function LandingPage() {
             { name: "Trial", price: "14 dias", fee: "0% de taxa", features: ["Tudo ilimitado", "Analytics", "Sem cartão"], highlight: false },
             { name: "PRO", price: "R$ 69/mês", fee: "0% de taxa", features: ["Drops ilimitados", "Analytics completo", "Suporte prioritário"], highlight: true },
           ].map((p) => (
-            <Reveal
-              key={p.name}
-              className={`rounded-2xl border p-6 ${p.highlight ? "border-accent bg-accent/5" : "border-border bg-card"}`}
-            >
-              {p.highlight && (
-                <span className="mb-3 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-                  RECOMENDADO
-                </span>
-              )}
-              <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
-              <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>
-              <div className="mt-1 text-sm font-medium text-foreground">{p.fee}</div>
-              <ul className="my-6 space-y-2">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span className="text-accent">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <MagneticLink
-                href="/login"
-                className={`w-full rounded-full px-5 py-3 text-sm font-medium ${p.highlight ? "bg-accent text-accent-foreground" : "border border-border text-foreground"}`}
-              >
-                Começar
-              </MagneticLink>
+            <Reveal key={p.name} className="h-full">
+              <MagicCard className="h-full rounded-2xl">
+                <div className="relative flex h-full flex-col p-6">
+                  {p.highlight && (
+                    <>
+                      <span className="mb-3 inline-block w-fit rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+                        RECOMENDADO
+                      </span>
+                      <BorderBeam size={70} duration={6} />
+                    </>
+                  )}
+                  <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
+                  <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>
+                  <div className="mt-1 text-sm font-medium text-foreground">{p.fee}</div>
+                  <ul className="my-6 space-y-2">
+                    {p.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="text-accent">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <MagneticLink
+                    href="/login"
+                    className={`mt-auto w-full rounded-full px-5 py-3 text-sm font-medium ${p.highlight ? "bg-accent text-accent-foreground" : "border border-border text-foreground"}`}
+                  >
+                    Começar
+                  </MagneticLink>
+                </div>
+              </MagicCard>
             </Reveal>
           ))}
         </div>
