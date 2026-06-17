@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 interface BeamsBackgroundProps {
@@ -121,13 +120,7 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
-      <canvas ref={canvasRef} className="absolute inset-0" style={{ filter: "blur(8px)" }} aria-hidden />
-      <motion.div
-        className="absolute inset-0 bg-background/5"
-        animate={{ opacity: [0.05, 0.15, 0.05] }}
-        transition={{ duration: 10, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
-        style={{ backdropFilter: "blur(50px)" }}
-      />
+      <canvas ref={canvasRef} className="absolute inset-0" aria-hidden />
     </div>
   )
 }
