@@ -60,14 +60,13 @@ export default function LandingPage() {
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <RippleDistortion
-            imageSrc={cover("nevoa-moletom-eclipse", 1600)}
-            frequency={16}
-            amplitude={0.025}
-            speed={4}
+            imageSrc={cover("nevoa-capsula-aurora", 1600)}
+            frequency={18}
+            amplitude={0.03}
+            speed={5}
             className="h-full w-full"
           />
-          <div className="absolute inset-0 bg-background/75" />
-          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background/90" />
         </div>
 
         <div className="relative">
