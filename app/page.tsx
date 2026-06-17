@@ -77,8 +77,9 @@ export default function LandingPage() {
       <section id="drops" className="relative overflow-hidden">
         <div className="absolute inset-x-0 top-0 -z-10 h-[70vh] overflow-hidden">
           <GrainBg />
-          <div className="absolute inset-0 bg-background/15" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+          <div className="absolute inset-0 bg-background/25" />
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-background" />
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">

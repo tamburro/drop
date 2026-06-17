@@ -10,10 +10,12 @@ export function GrainBg({ className }: { className?: string }) {
     <GrainGradient
       {...grainGradientPresets[0].params}
       colors={DROP_COLORS}
-      colorBack="#040508"
-      speed={0.6}
-      softness={0.6}
-      intensity={0.65}
+      colorBack="#082B38"
+      shape="waves"
+      scale={1.4}
+      speed={0.7}
+      softness={0.5}
+      intensity={0.8}
       className={className}
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     />
