@@ -102,12 +102,9 @@ export default function LandingPage() {
 
         {/* mural de capas — marquee horizontal (→), colunas alternadas, pausa no hover */}
         <div className="group/wall relative overflow-hidden">
-          <div
-            className="marquee-track flex w-max gap-2 px-1"
-            style={{ animationDirection: "reverse" }}
-          >
+          <div className="marquee-track flex w-max gap-2 px-1">
             {[...heroColumns, ...heroColumns].map((col, i) => (
-              <div key={i} className="flex h-[420px] w-44 shrink-0 flex-col gap-2 sm:h-[520px] sm:w-60">
+              <div key={i} className="flex h-[300px] w-40 shrink-0 flex-col gap-2 sm:h-[380px] sm:w-52">
                 {col.drops.map((d, j) => (
                   <Link
                     key={`${i}-${j}`}
