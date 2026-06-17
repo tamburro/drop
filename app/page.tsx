@@ -74,13 +74,13 @@ export default function LandingPage() {
       </nav>
 
       {/* HERO — mural de produtos */}
-      <section id="drops" className="relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[72vh] overflow-hidden">
+      <section id="drops" className="relative isolate overflow-hidden">
+        <div className="absolute inset-x-0 top-0 z-0 h-[72vh] overflow-hidden">
           <BeamsBackground intensity="medium" />
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
         </div>
 
-        <div className="relative mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
