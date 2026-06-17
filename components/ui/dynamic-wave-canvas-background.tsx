@@ -64,11 +64,12 @@ export default function HeroWave({ className }: { className?: string }) {
           const baseVal = 0.1 + 0.15 * fastCos(u_x + u_y + time * 0.3)
           const accent = baseVal + 0.2 * fastSin(a * 1.5 + time * 0.2) + 0.1
 
-          // paleta Drop: cyan/teal sobre quase-preto
+          // paleta Drop: cyan/teal sobre quase-preto, com brilho realçado
           const tone = Math.max(0, Math.min(1, accent)) * intensity
-          const r = tone * 0.1
-          const g = tone * 0.66
-          const b = tone * 0.8
+          const boost = 2.6
+          const r = Math.min(1, tone * 0.12 * boost)
+          const g = Math.min(1, tone * 0.62 * boost)
+          const b = Math.min(1, tone * 0.82 * boost)
 
           const index = (y * width + x) * 4
           data[index] = r * 255
