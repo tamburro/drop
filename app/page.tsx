@@ -6,6 +6,7 @@ import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { HeroCanvas } from "@/components/landing/hero-canvas"
 import { Logo } from "@/components/ui/logo"
+import RippleDistortion from "@/components/ui/ripple-distortion"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -113,6 +114,19 @@ export default function LandingPage() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* RIPPLE DISTORTION (teste 21st.dev) */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <div className="mx-auto aspect-video w-full max-w-3xl overflow-hidden rounded-2xl border border-border">
+          <RippleDistortion
+            imageSrc={cover("nevoa-capsula-aurora", 1000)}
+            frequency={25}
+            amplitude={0.03}
+            speed={6}
+            className="h-full w-full"
+          />
         </div>
       </section>
 
