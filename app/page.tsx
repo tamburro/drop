@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Package, Users, ShoppingBag, Truck, BarChart2, QrCode } from "lucide-react"
+import { Package, Users, ShoppingBag, Truck, BarChart2, QrCode, ArrowUpRight } from "lucide-react"
 import { DEMO_CREATORS, cover, avatar } from "@/lib/landing-data"
 import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
@@ -11,6 +11,23 @@ const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } 
 const allDrops = DEMO_CREATORS.flatMap((c) =>
   c.drops.map((d) => ({ ...d, handle: c.handle, brand: c.brandName }))
 )
+
+// colunas alternadas para o mural: 1 capa alta, depois 2 empilhadas, e assim por diante
+const wallSource = [...allDrops, ...allDrops, ...allDrops]
+const heroColumns: { type: "tall" | "stack"; drops: typeof allDrops }[] = []
+let wallIdx = 0
+for (let c = 0; heroColumns.length < 10; c++) {
+  if (c % 2 === 0) {
+    heroColumns.push({ type: "tall", drops: [wallSource[wallIdx % wallSource.length]] })
+    wallIdx += 1
+  } else {
+    heroColumns.push({
+      type: "stack",
+      drops: [wallSource[wallIdx % wallSource.length], wallSource[(wallIdx + 1) % wallSource.length]],
+    })
+    wallIdx += 2
+  }
+}
 
 const features = [
   { icon: Package, title: "Drop Builder", description: "Página de lançamento com countdown, galeria e estoque limitado em minutos." },
@@ -83,35 +100,44 @@ export default function LandingPage() {
           <p className="mt-4 text-xs text-muted-foreground">Grátis. Sem cartão. Sem mensalidade no plano Free.</p>
         </div>
 
-        {/* mural de capas reais */}
-        <div className="relative">
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
-            {[...allDrops, ...allDrops].slice(0, 12).map((d, i) => (
-              <Link
-                key={`${d.slug}-${i}`}
-                href={`/${d.handle}/${d.slug}`}
-                data-cursor
-                className="group relative aspect-square overflow-hidden"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={cover(d.slug, 500)}
-                  alt={d.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-background/25 transition-colors group-hover:bg-transparent" />
-                <span className="absolute left-2 top-2 rounded-full bg-background/70 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent backdrop-blur">
-                  {STATUS[d.status]}
-                </span>
-                <div className="absolute inset-x-2 bottom-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <p className="truncate text-xs font-medium text-foreground">{d.title}</p>
-                  <p className="truncate text-[10px] text-muted-foreground">{d.brand}</p>
-                </div>
-              </Link>
+        {/* mural de capas — marquee horizontal (→), colunas alternadas, pausa no hover */}
+        <div className="group/wall relative overflow-hidden">
+          <div
+            className="marquee-track flex w-max gap-2 px-1"
+            style={{ animationDirection: "reverse" }}
+          >
+            {[...heroColumns, ...heroColumns].map((col, i) => (
+              <div key={i} className="flex h-[420px] w-44 shrink-0 flex-col gap-2 sm:h-[520px] sm:w-60">
+                {col.drops.map((d, j) => (
+                  <Link
+                    key={`${i}-${j}`}
+                    href={`/${d.handle}/${d.slug}`}
+                    data-cursor
+                    className={`group relative ${col.type === "tall" ? "h-full" : "h-1/2"} overflow-hidden rounded-lg`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cover(d.slug, col.type === "tall" ? 700 : 500)}
+                      alt={d.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/50" />
+                    <span className="absolute left-2 top-2 inline-flex items-center gap-1 text-xs font-medium text-foreground drop-shadow">
+                      {d.brand}
+                      <ArrowUpRight className="h-3 w-3" />
+                    </span>
+                    <span className="absolute bottom-2 left-2 rounded-full bg-background/70 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent backdrop-blur">
+                      {STATUS[d.status]}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-background" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-background" />
         </div>
       </section>
 
