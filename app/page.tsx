@@ -264,7 +264,7 @@ export default function LandingPage() {
                 <div className="relative flex h-full flex-col p-6">
                   {p.highlight && (
                     <>
-                      <span className="mb-3 inline-block w-fit rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+                      <span className="absolute right-4 top-4 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
                         RECOMENDADO
                       </span>
                       <BorderBeam size={70} duration={6} />
