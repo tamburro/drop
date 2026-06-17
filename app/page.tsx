@@ -4,7 +4,7 @@ import { DEMO_CREATORS, cover, avatar } from "@/lib/landing-data"
 import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
-import { Logo } from "@/components/ui/logo"
+import { PublicHeader } from "@/components/layout/public-header"
 import HeroWave from "@/components/ui/dynamic-wave-canvas-background"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
@@ -55,23 +55,7 @@ export default function LandingPage() {
         Drops sem parar
       </div>
 
-      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-border/60 bg-background/70 px-6 py-4 backdrop-blur">
-        <Logo className="h-7 w-auto text-accent" />
-        <div className="flex items-center gap-5">
-          <Link href="/explorar" data-cursor className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
-            Explorar
-          </Link>
-          <Link href="#planos" data-cursor className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
-            Planos
-          </Link>
-          <Link href="/login" data-cursor className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Entrar
-          </Link>
-          <MagneticLink href="/login" className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
-            Começar grátis
-          </MagneticLink>
-        </div>
-      </nav>
+      <PublicHeader />
 
       {/* HERO — mural de produtos */}
       <section id="drops" className="relative isolate overflow-hidden">
