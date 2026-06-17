@@ -5,7 +5,7 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { Logo } from "@/components/ui/logo"
-import RippleDistortion from "@/components/ui/ripple-distortion"
+import { HeroCanvas } from "@/components/landing/hero-canvas"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -58,18 +58,11 @@ export default function LandingPage() {
 
       {/* HERO */}
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
-        <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
-          <div className="h-full min-h-[88vh] w-full">
-            <RippleDistortion
-              imageSrc={cover("nevoa-capsula-aurora", 1000)}
-              frequency={18}
-              amplitude={0.03}
-              speed={5}
-              className="h-full w-full"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/55 to-background/90" />
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
+          <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-accent/20 blur-[120px]" />
         </div>
+        <HeroCanvas />
 
         <div className="relative">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
