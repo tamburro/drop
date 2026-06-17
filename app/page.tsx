@@ -5,7 +5,6 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { Logo } from "@/components/ui/logo"
-import { HeroCanvas } from "@/components/landing/hero-canvas"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -56,15 +55,13 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
-          <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-accent/20 blur-[120px]" />
+      {/* HERO — mural de produtos */}
+      <section id="drops" className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[60vh]">
+          <div className="absolute left-1/2 top-0 h-[50vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/25 blur-[130px]" />
         </div>
-        <HeroCanvas />
 
-        <div className="relative">
+        <div className="mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
@@ -79,40 +76,42 @@ export default function LandingPage() {
             <MagneticLink href="/login" className="rounded-full bg-accent px-7 py-3 font-medium text-accent-foreground">
               Criar meu primeiro drop
             </MagneticLink>
-            <MagneticLink href="#drops" className="rounded-full border border-border px-7 py-3 font-medium text-foreground">
+            <MagneticLink href="/explorar" className="rounded-full border border-border px-7 py-3 font-medium text-foreground">
               Ver drops ao vivo
             </MagneticLink>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">Grátis. Sem cartão. Sem mensalidade no plano Free.</p>
         </div>
-      </section>
 
-      {/* MARQUEE */}
-      <section id="drops" className="border-y border-border/60 py-10">
-        <div className="flex w-max marquee-track gap-4">
-          {[...allDrops, ...allDrops].map((d, i) => (
-            <Link
-              key={`${d.slug}-${i}`}
-              href={`/${d.handle}/${d.slug}`}
-              data-cursor
-              className="group relative block h-56 w-56 shrink-0 overflow-hidden rounded-2xl border border-border"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cover(d.slug, 400)}
-                alt={d.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:-skew-y-1"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3">
-                <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent">
+        {/* mural de capas reais */}
+        <div className="relative">
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+            {[...allDrops, ...allDrops].slice(0, 12).map((d, i) => (
+              <Link
+                key={`${d.slug}-${i}`}
+                href={`/${d.handle}/${d.slug}`}
+                data-cursor
+                className="group relative aspect-square overflow-hidden"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={cover(d.slug, 500)}
+                  alt={d.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-background/25 transition-colors group-hover:bg-transparent" />
+                <span className="absolute left-2 top-2 rounded-full bg-background/70 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent backdrop-blur">
                   {STATUS[d.status]}
                 </span>
-                <p className="mt-1 truncate text-sm font-medium text-foreground">{d.title}</p>
-                <p className="text-xs text-muted-foreground">{d.brand}</p>
-              </div>
-            </Link>
-          ))}
+                <div className="absolute inset-x-2 bottom-2 opacity-0 transition-opacity group-hover:opacity-100">
+                  <p className="truncate text-xs font-medium text-foreground">{d.title}</p>
+                  <p className="truncate text-[10px] text-muted-foreground">{d.brand}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-background" />
         </div>
       </section>
 
