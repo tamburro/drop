@@ -98,8 +98,13 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
 
     function animate() {
       if (!canvas || !ctx) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.filter = "blur(22px)"
+      // base opaca + blend aditivo: a luz dos feixes soma e brilha sobre o escuro
+      ctx.globalCompositeOperation = "source-over"
+      ctx.filter = "none"
+      ctx.fillStyle = "#040508"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      ctx.globalCompositeOperation = "lighter"
+      ctx.filter = "blur(20px)"
       const totalBeams = beamsRef.current.length
       beamsRef.current.forEach((beam, index) => {
         beam.y -= beam.speed
