@@ -4,6 +4,7 @@ import { db } from "@/lib/db"
 import { TrialBanner } from "@/components/layout/trial-banner"
 import { daysLeftInTrial, isTrialActive } from "@/lib/subscription"
 import Link from "next/link"
+import { Logo } from "@/components/ui/logo"
 import { Home, Package, ShoppingBag, BarChart2, Settings, Store } from "lucide-react"
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +20,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
     <div className="flex h-screen bg-background">
       <aside className="flex w-56 flex-col border-r border-sidebar-border bg-sidebar">
         <div className="flex h-14 items-center px-4 border-b border-sidebar-border">
-          <span className="font-display text-2xl tracking-wide text-accent">DROP</span>
+          <Logo className="h-7 w-auto text-accent" />
         </div>
         <nav className="flex-1 space-y-1 p-2">
           {[

@@ -5,6 +5,7 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { HeroCanvas } from "@/components/landing/hero-canvas"
+import { Logo } from "@/components/ui/logo"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -38,7 +39,7 @@ export default function LandingPage() {
       </div>
 
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-border/60 bg-background/70 px-6 py-4 backdrop-blur">
-        <span className="font-display text-2xl tracking-wide text-accent">DROP</span>
+        <Logo className="h-7 w-auto text-accent" />
         <div className="flex items-center gap-5">
           <Link href="/explorar" data-cursor className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
             Explorar

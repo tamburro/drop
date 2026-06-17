@@ -1,4 +1,5 @@
 import { signIn } from "@/lib/auth"
+import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,7 +10,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-sm rounded-2xl border-border bg-card">
         <CardHeader className="text-center">
-          <div className="mb-2 font-display text-3xl tracking-wide text-accent">DROP</div>
+          <Logo className="mx-auto mb-3 h-9 w-auto text-accent" />
           <CardTitle className="font-display text-xl uppercase tracking-tight text-foreground">Entrar</CardTitle>
           <CardDescription className="text-muted-foreground">
             Lance drops. Venda para quem realmente quer.
