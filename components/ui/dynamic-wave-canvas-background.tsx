@@ -21,15 +21,18 @@ export default function HeroWave({ className }: { className?: string }) {
     const SCALE = 3
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      width = Math.floor(canvas.width / SCALE)
-      height = Math.floor(canvas.height / SCALE)
+      const w = canvas.clientWidth || window.innerWidth
+      const h = canvas.clientHeight || window.innerHeight
+      canvas.width = w
+      canvas.height = h
+      width = Math.max(1, Math.floor(w / SCALE))
+      height = Math.max(1, Math.floor(h / SCALE))
       imageData = ctx.createImageData(width, height)
       data = imageData.data
     }
 
-    window.addEventListener("resize", resizeCanvas)
+    const ro = new ResizeObserver(resizeCanvas)
+    ro.observe(canvas)
     resizeCanvas()
 
     const startTime = Date.now()
@@ -89,7 +92,7 @@ export default function HeroWave({ className }: { className?: string }) {
     render()
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
+      ro.disconnect()
       cancelAnimationFrame(raf)
     }
   }, [])
