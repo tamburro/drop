@@ -32,7 +32,7 @@ function createBeam(width: number, height: number): Beam {
     length: height * 2.5,
     angle,
     speed: 0.6 + Math.random() * 1.2,
-    opacity: 0.12 + Math.random() * 0.16,
+    opacity: 0.5 + Math.random() * 0.35,
     hue: 184 + Math.random() * 16,
     pulse: Math.random() * Math.PI * 2,
     pulseSpeed: 0.02 + Math.random() * 0.03,
@@ -76,7 +76,7 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
       beam.width = 100 + Math.random() * 100
       beam.speed = 0.5 + Math.random() * 0.4
       beam.hue = 184 + (index * 16) / totalBeams
-      beam.opacity = 0.2 + Math.random() * 0.1
+      beam.opacity = 0.55 + Math.random() * 0.25
       return beam
     }
 
@@ -100,7 +100,7 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
     function animate() {
       if (!canvas || !ctx) return
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.filter = "blur(35px)"
+      ctx.filter = "blur(22px)"
       const totalBeams = beamsRef.current.length
       beamsRef.current.forEach((beam, index) => {
         beam.y -= beam.speed
@@ -121,7 +121,7 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
-      <canvas ref={canvasRef} className="absolute inset-0" style={{ filter: "blur(15px)" }} aria-hidden />
+      <canvas ref={canvasRef} className="absolute inset-0" style={{ filter: "blur(8px)" }} aria-hidden />
       <motion.div
         className="absolute inset-0 bg-background/5"
         animate={{ opacity: [0.05, 0.15, 0.05] }}
