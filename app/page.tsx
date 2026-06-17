@@ -47,7 +47,7 @@ const steps = [
 
 export default function LandingPage() {
   return (
-    <div className="relative overflow-hidden bg-background text-foreground">
+    <div className="relative overflow-x-clip bg-background text-foreground">
       <Cursor />
 
       {/* wordmark vertical */}
