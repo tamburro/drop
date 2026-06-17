@@ -58,15 +58,17 @@ export default function LandingPage() {
 
       {/* HERO */}
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <RippleDistortion
-            imageSrc={cover("nevoa-capsula-aurora", 1600)}
-            frequency={18}
-            amplitude={0.03}
-            speed={5}
-            className="h-full w-full"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background/90" />
+        <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
+          <div className="h-full min-h-[88vh] w-full">
+            <RippleDistortion
+              imageSrc={cover("nevoa-capsula-aurora", 1000)}
+              frequency={18}
+              amplitude={0.03}
+              speed={5}
+              className="h-full w-full"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/55 to-background/90" />
         </div>
 
         <div className="relative">
