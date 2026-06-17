@@ -5,7 +5,6 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { Logo } from "@/components/ui/logo"
-import HeroWave from "@/components/ui/dynamic-wave-canvas-background"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -75,13 +74,11 @@ export default function LandingPage() {
 
       {/* HERO — mural de produtos */}
       <section id="drops" className="relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[72vh] overflow-hidden">
-          <HeroWave />
-          <div className="absolute inset-0 bg-background/20" />
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[60vh]">
+          <div className="absolute left-1/2 top-0 h-[50vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/25 blur-[130px]" />
         </div>
 
-        <div className="relative mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
+        <div className="mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
