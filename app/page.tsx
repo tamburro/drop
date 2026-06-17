@@ -102,6 +102,9 @@ export default function LandingPage() {
           <p className="mt-4 text-xs text-muted-foreground">Grátis. Sem cartão. Sem mensalidade no plano Free.</p>
         </div>
 
+        {/* faixa de transição: funde o wave em preto ANTES dos cards (não cobre os nomes) */}
+        <div className="pointer-events-none h-32 w-full bg-gradient-to-b from-transparent to-background sm:h-48" />
+
         {/* mural de capas — marquee horizontal (→), colunas alternadas, pausa no hover */}
         <div className="group/wall relative overflow-hidden">
           <div className="marquee-track flex w-max gap-2 px-1">
@@ -135,7 +138,6 @@ export default function LandingPage() {
           </div>
           <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-background via-background/65 to-transparent sm:h-80" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-background" />
         </div>
       </section>
