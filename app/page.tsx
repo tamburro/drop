@@ -80,7 +80,7 @@ export default function LandingPage() {
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-12 pt-20 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-6 pt-10 text-center">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
@@ -103,7 +103,7 @@ export default function LandingPage() {
         </div>
 
         {/* faixa de transição: funde o wave em preto ANTES dos cards (não cobre os nomes) */}
-        <div className="pointer-events-none h-32 w-full bg-gradient-to-b from-transparent to-background sm:h-48" />
+        <div className="pointer-events-none h-12 w-full bg-gradient-to-b from-transparent to-background sm:h-20" />
 
         {/* mural de capas — marquee horizontal (→), colunas alternadas, pausa no hover */}
         <div className="group/wall relative overflow-hidden">
