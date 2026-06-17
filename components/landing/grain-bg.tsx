@@ -11,7 +11,7 @@ export function GrainBg({ className }: { className?: string }) {
       {...grainGradientPresets[0].params}
       colors={DROP_COLORS}
       colorBack="#082B38"
-      shape="waves"
+      shape="blob"
       scale={1.4}
       speed={0.7}
       softness={0.5}
