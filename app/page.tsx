@@ -5,7 +5,7 @@ import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { Logo } from "@/components/ui/logo"
-import { BeamsBackground } from "@/components/ui/beams-background"
+import HeroWave from "@/components/ui/dynamic-wave-canvas-background"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -76,7 +76,7 @@ export default function LandingPage() {
       {/* HERO — mural de produtos */}
       <section id="drops" className="relative isolate overflow-hidden">
         <div className="absolute inset-x-0 top-0 z-0 h-[72vh] overflow-hidden">
-          <BeamsBackground intensity="medium" />
+          <HeroWave className="absolute inset-0 h-full w-full" />
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
         </div>
 
