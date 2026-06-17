@@ -259,17 +259,15 @@ export default function LandingPage() {
             { name: "Trial", price: "14 dias", fee: "0% de taxa", features: ["Tudo ilimitado", "Analytics", "Sem cartão"], highlight: false },
             { name: "PRO", price: "R$ 69/mês", fee: "0% de taxa", features: ["Drops ilimitados", "Analytics completo", "Suporte prioritário"], highlight: true },
           ].map((p) => (
-            <Reveal key={p.name} className="h-full">
+            <Reveal key={p.name} className="relative h-full">
+              {p.highlight && (
+                <span className="absolute -top-3 left-1/2 z-50 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-accent-foreground shadow-lg">
+                  Recomendado
+                </span>
+              )}
               <MagicCard className="h-full rounded-2xl">
                 <div className="relative flex h-full flex-col p-6">
-                  {p.highlight && (
-                    <>
-                      <span className="absolute right-4 top-4 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-                        RECOMENDADO
-                      </span>
-                      <BorderBeam size={70} duration={6} />
-                    </>
-                  )}
+                  {p.highlight && <BorderBeam size={70} duration={6} />}
                   <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
                   <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>
                   <div className="mt-1 text-sm font-medium text-foreground">{p.fee}</div>
