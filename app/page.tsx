@@ -4,7 +4,6 @@ import { DEMO_CREATORS, cover, avatar } from "@/lib/landing-data"
 import { Cursor } from "@/components/landing/cursor"
 import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
-import { HeroCanvas } from "@/components/landing/hero-canvas"
 import { Logo } from "@/components/ui/logo"
 import RippleDistortion from "@/components/ui/ripple-distortion"
 
@@ -59,11 +58,17 @@ export default function LandingPage() {
 
       {/* HERO */}
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
-          <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-accent/20 blur-[120px]" />
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <RippleDistortion
+            imageSrc={cover("nevoa-moletom-eclipse", 1600)}
+            frequency={16}
+            amplitude={0.025}
+            speed={4}
+            className="h-full w-full"
+          />
+          <div className="absolute inset-0 bg-background/75" />
+          <div className="absolute left-1/2 top-1/3 h-[60vh] w-[60vh] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
         </div>
-        <HeroCanvas />
 
         <div className="relative">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
@@ -114,19 +119,6 @@ export default function LandingPage() {
               </div>
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* RIPPLE DISTORTION (teste 21st.dev) */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <div className="mx-auto aspect-video w-full max-w-3xl overflow-hidden rounded-2xl border border-border">
-          <RippleDistortion
-            imageSrc={cover("nevoa-capsula-aurora", 1000)}
-            frequency={25}
-            amplitude={0.03}
-            speed={6}
-            className="h-full w-full"
-          />
         </div>
       </section>
 
