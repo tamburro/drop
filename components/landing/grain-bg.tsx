@@ -2,8 +2,8 @@
 
 import { GrainGradient, grainGradientPresets } from "@paper-design/shaders-react"
 
-// cores do design system do Drop (background / primary / accent)
-const DROP_COLORS = ["#0A3A4A", "#12A8C4", "#0A3A4A", "#040508"]
+// puxado para o acento cyan do Drop, com a primária teal, sobre o fundo escuro
+const DROP_COLORS = ["#12A8C4", "#0A3A4A", "#12A8C4", "#1FC8E0"]
 
 export function GrainBg({ className }: { className?: string }) {
   return (
@@ -12,8 +12,8 @@ export function GrainBg({ className }: { className?: string }) {
       colors={DROP_COLORS}
       colorBack="#040508"
       speed={0.6}
-      softness={0.7}
-      intensity={0.45}
+      softness={0.6}
+      intensity={0.65}
       className={className}
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     />
