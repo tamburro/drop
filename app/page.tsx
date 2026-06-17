@@ -273,7 +273,7 @@ export default function LandingPage() {
                   <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
                   <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>
                   <div className="mt-1 text-sm font-medium text-foreground">{p.fee}</div>
-                  <ul className="my-6 space-y-2">
+                  <ul className="my-6 flex-1 space-y-2">
                     {p.features.map((f) => (
                       <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span className="text-accent">✓</span> {f}
