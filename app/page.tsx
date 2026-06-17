@@ -64,7 +64,7 @@ export default function LandingPage() {
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-6 pt-10 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-6 pt-16 text-center">
           <h1 className="font-display text-6xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl">
             Lance drops.
             <br />
@@ -79,7 +79,7 @@ export default function LandingPage() {
             <MagneticLink href="/login" className="rounded-full bg-accent px-7 py-3 font-medium text-accent-foreground">
               Criar meu primeiro drop
             </MagneticLink>
-            <MagneticLink href="/explorar" className="rounded-full border border-border px-7 py-3 font-medium text-foreground">
+            <MagneticLink href="/explorar" className="rounded-full border border-foreground px-7 py-3 font-medium text-foreground">
               Ver drops ao vivo
             </MagneticLink>
           </div>
