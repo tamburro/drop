@@ -31,7 +31,7 @@ function createBeam(width: number, height: number): Beam {
     length: height * 2.5,
     angle,
     speed: 0.6 + Math.random() * 1.2,
-    opacity: 0.5 + Math.random() * 0.35,
+    opacity: 0.85 + Math.random() * 0.4,
     hue: 184 + Math.random() * 16,
     pulse: Math.random() * Math.PI * 2,
     pulseSpeed: 0.02 + Math.random() * 0.03,
@@ -75,7 +75,7 @@ export function BeamsBackground({ className, intensity = "strong" }: BeamsBackgr
       beam.width = 100 + Math.random() * 100
       beam.speed = 0.5 + Math.random() * 0.4
       beam.hue = 184 + (index * 16) / totalBeams
-      beam.opacity = 0.55 + Math.random() * 0.25
+      beam.opacity = 0.85 + Math.random() * 0.3
       return beam
     }
 
