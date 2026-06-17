@@ -6,6 +6,7 @@ import { Reveal } from "@/components/landing/reveal"
 import { MagneticLink } from "@/components/landing/magnetic"
 import { HeroCanvas } from "@/components/landing/hero-canvas"
 import { Logo } from "@/components/ui/logo"
+import { HeroGeometric } from "@/components/ui/shape-landing-hero"
 
 const STATUS = { LIVE: "Ao vivo", SCHEDULED: "Em breve", SOLD_OUT: "Esgotado" } as const
 
@@ -55,6 +56,13 @@ export default function LandingPage() {
           </MagneticLink>
         </div>
       </nav>
+
+      {/* HERO GEOMÉTRICO (teste 21st.dev) */}
+      <HeroGeometric
+        badge="Drop"
+        title1="Lance drops."
+        title2="Venda pra quem quer."
+      />
 
       {/* HERO */}
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center px-6 text-center">
