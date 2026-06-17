@@ -266,7 +266,7 @@ export default function LandingPage() {
                 </span>
               )}
               <MagicCard className="h-full rounded-2xl">
-                <div className="relative flex h-full flex-col p-6">
+                <div className="relative flex flex-1 flex-col p-6">
                   {p.highlight && <BorderBeam size={70} duration={6} />}
                   <div className="font-display text-2xl uppercase text-foreground">{p.name}</div>
                   <div className="mt-1 text-2xl font-bold text-accent">{p.price}</div>

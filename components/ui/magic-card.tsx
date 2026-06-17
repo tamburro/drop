@@ -47,7 +47,7 @@ export function MagicCard({
 
   return (
     <motion.div
-      className={cn("group relative isolate overflow-hidden rounded-[inherit] border border-transparent", className)}
+      className={cn("group relative isolate flex flex-col overflow-hidden rounded-[inherit] border border-transparent", className)}
       onPointerMove={handlePointerMove}
       onPointerLeave={reset}
       style={{
@@ -74,7 +74,7 @@ export function MagicCard({
           opacity: gradientOpacity,
         }}
       />
-      <div className="relative z-40 h-full">{children}</div>
+      <div className="relative z-40 flex flex-1 flex-col">{children}</div>
     </motion.div>
   )
 }
