@@ -13,7 +13,7 @@ export default async function StorefrontPage() {
       <div>
         <h1 className="font-display text-3xl uppercase tracking-tight text-foreground">Minha vitrine</h1>
         <p className="text-sm text-muted-foreground">
-          Sua identidade pública. Os drops aparecem na sua vitrine em usedrop-br.vercel.app/@handle.
+          Sua identidade pública. Os drops aparecem na sua vitrine em lancedrop.vercel.app/@handle.
         </p>
       </div>
 

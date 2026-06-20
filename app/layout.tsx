@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 const anton = Anton({ variable: "--font-display", weight: "400", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://usedrop-br.vercel.app"),
+  metadataBase: new URL("https://lancedrop.vercel.app"),
   title: "Drop — Lance drops. Venda para quem realmente quer.",
   description: "Plataforma de loja para criadores que lançam produtos limitados com lista de espera.",
   manifest: "/manifest.webmanifest",
